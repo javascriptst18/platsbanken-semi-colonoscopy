@@ -20,6 +20,7 @@ async function searchByCriteria(searchCriteria) {
   const matches = await responseObject.json();
 }
 
+
 // lyssna på submit från form för sökning på stad
 citySearch.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -43,3 +44,19 @@ citySearch.addEventListener("submit", (event) => {
   }
   searchByCriteria(`platsannonser/matchning?${stockholm}${goteborg}${malmo}&yrkesomradeid=3&antalrader=30`);
 });
+
+
+
+
+
+async function fetchData(url){
+  try{
+      let result = await fetch(url);
+      let resultResolve = await result.json();
+      return resultResolve; 
+  } catch(error) {
+      return error;
+  }
+ 
+}
+  
