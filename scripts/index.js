@@ -36,17 +36,16 @@ let printTop10 = function(apiData){
   
   divToPrint += 
   `
-    <div class=card>
-      <p>Annonsrubrik: ${each.annonsrubrik}</p>
-      <p>Yrkesbenämning: ${each.yrkesbenämning}</p>
-      <p>arbetsplatsnamn = ${each.arbetsplatsnamn}</p>
-      <p>kommunnamn = ${each.kommunnamn}</p>
-      <p>publiceraddatum = ${each.publiceraddatum}</p>
-      <p>antalplatser = ${each.antalplatser}</p>
-      <p>sista_ansokningsdag = ${each.sista_ansokningsdag}</p>
-      <p>annonsurl = ${each.annonsurl}</p>
-      <p>____________________________</p>
-    </div>
+  <div class=card>
+  <div class="card-flex"><h3 class="annons-rubrik">${each.annonsrubrik}</h3><h5 class="lan">${each.kommunnamn}</h5></div>
+  <h5 class="yrkesbenamning">${each.yrkesbenamning}</h5>
+  <h3 class="foretag">Företag: ${each.arbetsplatsnamn}</h3>
+  
+  <div class="card-flex"><h5 class="publicerad">3V</h5>` + //lägg in funktion för att räkna ut hur gammal
+  `<h5 class"deadline">Sista ansökningsdag: <span>${each.sista_ansokningsdag}</span</h5>
+  </div>
+  <a href="${each.annonsurl}" class="ansok">Ansök</a>
+</div>
   `;
   console.log("annonsrubrik = " + each.annonsrubrik);
   console.log("yrkesbenämning = " + each.yrkesbenamning);
@@ -60,7 +59,7 @@ let printTop10 = function(apiData){
   }
   cardWrapper.innerHTML = divToPrint; 
 }
-}
+
 
 
 // lyssna på submit från form för sökning på stad
