@@ -10,10 +10,10 @@
 * For of loopar då det går.
 
 struktur:
-variabler
-eventlisteners
-funktioner
-execution
+* variabler
+* eventlisteners
+* funktioner
+* execution
 
 
 
