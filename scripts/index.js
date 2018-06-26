@@ -37,15 +37,13 @@ let printTop10 = function(apiData){
   divToPrint += 
   `
     <div class=card>
-      <p>Annonsrubrik: ${each.annonsrubrik}</p>
-      <p>Yrkesbenämning: ${each.yrkesbenämning}</p>
-      <p>arbetsplatsnamn = ${each.arbetsplatsnamn}</p>
-      <p>kommunnamn = ${each.kommunnamn}</p>
-      <p>publiceraddatum = ${each.publiceraddatum}</p>
-      <p>antalplatser = ${each.antalplatser}</p>
-      <p>sista_ansokningsdag = ${each.sista_ansokningsdag}</p>
-      <p>annonsurl = ${each.annonsurl}</p>
-      <p>____________________________</p>
+      <h3 class="annons-rubrik">${each.annonsrubrik}</h3>
+      <h5 class="yrkesbenamning">${each.yrkesbenamning}</h5>
+      <p>Företag: ${each.arbetsplatsnamn}</p>
+      <h5 class="lan">${each.kommunnamn}</h5>
+      <p>Publicerad: ${each.publiceraddatum}</p>
+      <h5 class="deadline">Sista ansökningsdag: ${each.sista_ansokningsdag}</h5>
+      <a href="${each.annonsurl}">Ansök</a>
     </div>
   `;
   console.log("annonsrubrik = " + each.annonsrubrik);
@@ -53,13 +51,11 @@ let printTop10 = function(apiData){
   console.log("arbetsplatsnamn = " + each.arbetsplatsnamn);
   console.log("kommunnamn = " + each.kommunnamn);
   console.log("publiceringsdatum = " + each.publiceraddatum);
-  console.log("antalplatser = " + each.antalplatser);
   console.log("sista_ansokningsdag = " + each.sista_ansokningsdag);
   console.log("annonsURL = " + each.annonsurl);
   console.log("------------------------------");
   }
   cardWrapper.innerHTML = divToPrint; 
-}
 }
 
 
