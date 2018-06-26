@@ -1,16 +1,17 @@
+@import "variables";
 
-
-*{
+* {
   box-sizing: border-box;
+}
+
+body {
+  background-color: #03A9F4;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-@import "variables";
-@import "card";
+.main-wrapper {
+  width: 90%;
+}
 
-.🍌 {
-  background-color: $banana;
-}
-body{
-  background-color: #03A9F4;
-}
+@import "search";
+@import "card";
