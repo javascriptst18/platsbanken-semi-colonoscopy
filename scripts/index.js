@@ -9,3 +9,17 @@ async function searchByCriteria(searchCriteria) {
 }
 
 searchByCriteria('platsannonser/matchning?lanid=1&yrkesomradeid=3&antalrader=30');
+
+
+
+async function fetchData(url){
+  try{
+      let result = await fetch(url);
+      let resultResolve = await result.json();
+      return resultResolve; 
+  } catch(error) {
+      return error;
+  }
+ 
+}
+  
