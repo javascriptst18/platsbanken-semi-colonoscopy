@@ -42,9 +42,9 @@ let printTop10 = function(apiData){
   <h3 class="foretag">Företag: ${each.arbetsplatsnamn}</h3>
   
   <div class="card-flex"><h5 class="publicerad">3V</h5>` + //lägg in funktion för att räkna ut hur gammal
-  `<h5 class"deadline">Sista ansökningsdag: <span>${each.sista_ansokningsdag}</span</h5>
+  `<h5 class="deadline">Sista ansökningsdag: <span>${each.sista_ansokningsdag}</span</h5>
   </div>
-  <a href="${each.annonsurl}" class="ansok">Ansök</a>
+  <a href="${each.annonsurl}" class="flex-link"><button class="ansok">Ansök</button></a>
 </div>
   `;
   console.log("annonsrubrik = " + each.annonsrubrik);
