@@ -13,27 +13,19 @@
 
 <body>
   <div class="main-wrapper">
-    <div class="search-wrapper">
-      <div class="search-wrapper-inner">
-       <form class="main-search-form" id="mainSearchForm">
-         <input type="text" id="search-keyword">
-          <div class="checkbox-wrapper">
-            <input type="checkbox" id="cityStockholm" name="search-city" value="stockholm">
-            <label for="cityStockholm">Stockholm</label>
-          </div>
-          <div class="checkbox-wrapper">
-            <input type="checkbox" id="cityGoteborg" name="search-city" value="goteborg">
-            <label for="cityGoteborg">Göteborg</label>
-          </div>
-          <div class="checkbox-wrapper">
-            <input type="checkbox" id="cityMalmo" name="search-city" value="malmo">
-            <label for="cityMalmo">Malmö</label>
-          </div>
-          <!-- <div> -->
-            <button type="submit">Sök</button>
-          <!-- </div> -->
-        </form>
-      </div>
+    <div class="form-wrapper">
+      <form id="mainSearchForm">
+        <input type="text" id="searchKeyword">
+        <input type="checkbox" id="cityStockholm" name="search-city" value="stockholm">
+        <label for="cityStockholm">Stockholm</label>
+        <input type="checkbox" id="cityGoteborg" name="search-city" value="goteborg">
+        <label for="cityGoteborg">Göteborg</label>
+        <input type="checkbox" id="cityMalmo" name="search-city" value="malmo">
+        <label for="cityMalmo">Malmö</label>
+      <!-- <div> -->
+        <button type="submit">Sök</button>
+        <!-- </div> -->
+      </form>
       <!-- <div class="search-filtration-wrapper">
         <div class="search-filter-1">
           
