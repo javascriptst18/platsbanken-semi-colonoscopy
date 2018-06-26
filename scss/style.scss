@@ -1,12 +1,19 @@
+@import "variables";
 
-
-*{
+* {
   box-sizing: border-box;
 }
 
-@import "variables";
-@import "card";
-
-.🍌 {
-  background-color: $banana;
+body {
+  background-color: #03A9F4;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.main-wrapper {
+  margin: 0 auto;
+  max-width: 1080px;
+  width: 90%;
+}
+
+@import "search";
+@import "card";

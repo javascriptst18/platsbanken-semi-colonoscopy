@@ -11,73 +11,41 @@
   <title>Semi-Colonoscopy</title>
 </head>
 
-
-
-
-
-
 <body>
   <div class="main-wrapper">
-    <div class="search-overview-wrapper">
-      <div class="search">
-
-      </div>
-      <div class="search-filtration-wrapper">
-        <div class="search-filter-1"></div>
+    <div class="form-wrapper">
+      <form id="mainSearchForm">
+        <input type="text" id="searchKeyword">
+        <input type="checkbox" id="cityStockholm" name="search-city" value="stockholm">
+        <label for="cityStockholm">Stockholm</label>
+        <input type="checkbox" id="cityGoteborg" name="search-city" value="goteborg">
+        <label for="cityGoteborg">Göteborg</label>
+        <input type="checkbox" id="cityMalmo" name="search-city" value="malmo">
+        <label for="cityMalmo">Malmö</label>
+      <!-- <div> -->
+        <button type="submit">Sök</button>
+        <!-- </div> -->
+      </form>
+      <!-- <div class="search-filtration-wrapper">
+        <div class="search-filter-1">
+          
+        </div>
         <div class="search-filter-2"></div>
         <div class="search-filter-3"></div>
         <div class="search-filter-4"></div>
         <div class="search-filter-5"></div>
-      </div>
+      </div> -->
     </div>
-      
-          <div class="card-wrapper">
-            
-            <div class="card" id"1"> <!-- only example, replace later with real card -->
-              <div class="card-flex"> <h3 class="annons-rubrik">Javascript Developer</h3> <h5 class="lan">Stockholm Län</h5></div>
-              <h5 class="yrkesbenämning">Programmering</h5> 
-
-              
-              <h5>Sista ansökningsdag: <span>2018-06-25</span></h5>
-              
-            </div> 
-            
-            </div> 
-          </div>
-        
-  </div>
-
-
-
-
-
-
-
-
-  <form id="citySearch">
-    <div>
-      <input type="checkbox" id="cityStockholm" name="search-city" value="stockholm">
-      <label for="cityStockholm">Stockholm</label>
-    </div>
-    <div>
-      <input type="checkbox" id="cityGoteborg" name="search-city" value="goteborg">
-      <label for="cityGoteborg">Göteborg</label>
-    </div>
-    <div>
-      <input type="checkbox" id="cityMalmo" name="search-city" value="malmo">
-      <label for="cityMalmo">Malmö</label>
-    </div>
-
-    <div>
-      <button type="submit">Sök</button>
-    </div>
-  </form>
-
+    <div class="card-wrapper">
+    <!-- JavaScript Content Inserted Here -->
+    </div> 
+  </div> 
+<!-- 
   <div class="card-wrapper">
     
   </div>
 
-  </div>
+  </div> -->
 
   <script src="scripts/index.js"></script>
 </body>
