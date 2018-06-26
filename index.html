@@ -20,10 +20,32 @@
   <div class="main-wrapper">
     <div class="search-overview-wrapper">
       <div class="search">
-
+       <form>
+         <input type="text" class="search-field">
+         <button>Sök</button>
+       </form> 
       </div>
       <div class="search-filtration-wrapper">
-        <div class="search-filter-1"></div>
+        <div class="search-filter-1">
+          <form id="citySearch">
+            <div>
+              <input type="checkbox" id="cityStockholm" name="search-city" value="stockholm">
+              <label for="cityStockholm">Stockholm</label>
+            </div>
+            <div>
+              <input type="checkbox" id="cityGoteborg" name="search-city" value="goteborg">
+              <label for="cityGoteborg">Göteborg</label>
+            </div>
+            <div>
+              <input type="checkbox" id="cityMalmo" name="search-city" value="malmo">
+              <label for="cityMalmo">Malmö</label>
+            </div>
+        
+            <div>
+              <button type="submit">Sök</button>
+            </div>
+          </form>
+        </div>
         <div class="search-filter-2"></div>
         <div class="search-filter-3"></div>
         <div class="search-filter-4"></div>
@@ -34,7 +56,7 @@
           <div class="card-wrapper">
             
             <div class="card" id"1"> <!-- only example, replace later with real card -->
-              <div class="card-flex"> <h3 class="annons-rubrik">Javascript Developer</h3> <h5 class="lan">Stockholm Län</h5></div>
+              <div class="card-flex"><h3 class="annons-rubrik">Javascript Developer</h3> <h5 class="lan">Stockholm Län</h5></div>
               <h5 class="yrkesbenämning">Programmering</h5> 
 
               
@@ -54,24 +76,7 @@
 
 
 
-  <form id="citySearch">
-    <div>
-      <input type="checkbox" id="cityStockholm" name="search-city" value="stockholm">
-      <label for="cityStockholm">Stockholm</label>
-    </div>
-    <div>
-      <input type="checkbox" id="cityGoteborg" name="search-city" value="goteborg">
-      <label for="cityGoteborg">Göteborg</label>
-    </div>
-    <div>
-      <input type="checkbox" id="cityMalmo" name="search-city" value="malmo">
-      <label for="cityMalmo">Malmö</label>
-    </div>
-
-    <div>
-      <button type="submit">Sök</button>
-    </div>
-  </form>
+  
 
   <script src="scripts/index.js"></script>
 </body>
