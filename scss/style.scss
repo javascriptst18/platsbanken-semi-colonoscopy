@@ -1,4 +1,11 @@
-$banana: #fac863;
+
+
+*{
+  box-sizing: border-box;
+}
+
+@import "variables";
+@import "card";
 
 .🍌 {
   background-color: $banana;
