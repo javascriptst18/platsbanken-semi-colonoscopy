@@ -4,6 +4,20 @@ let cardWrapper = document.querySelector(".card-wrapper");
 let apiData = "";
 let divToPrint = "";
 
+let jobSearchOptions = {
+  mainSearchForm: document.querySelector("#mainSearchForm"),
+  searchKeyword: document.querySelector("#searchKeyword"),
+  cityStockholm: document.querySelector("#cityStockholm"),
+  cityGoteborg: document.querySelector("#cityGoteborg"),
+  cityMalmo: document.querySelector("#cityMalmo"),
+  stockholm: "",
+  goteborg: "",
+  malmo: "",
+  nyckelord: ""
+}
+
+/*
+
 // form för att söka på stad
 const mainSearchForm = document.querySelector("#mainSearchForm");
 // input field för att söka på nyckelord
@@ -24,6 +38,7 @@ let malmo = "";
 // tom variabel för att lagra nyckelord i sökning
 let nyckelord = "";
 
+*/
 
 async function searchByCriteria(searchCriteria) {
   const baseURL = "http://api.arbetsformedlingen.se/af/v0/";
@@ -34,8 +49,7 @@ async function searchByCriteria(searchCriteria) {
   printTop10(apiData);
 }
 
-
-let printTop10 = function(apiData){
+let printTop10 = function(apiData) {
   for (let each of apiData){
   
   divToPrint += 
@@ -67,30 +81,30 @@ let printTop10 = function(apiData){
 mainSearchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   // kolla om input field har innehåll och lagra i variabeln
-  if (searchKeyword.value !== "") {
+  if (jobSearchOptions.searchKeyword.value !== "") {
     nyckelord = searchKeyword.value;
   } else {
-    nyckelord = "";
+    jobSearchOptions.nyckelord = "";
   }
   // kolla om stockholm-boxen är checkad och lagra i variabeln
-  if (cityStockholm.checked) {
-    stockholm = "&lanid=1";
+  if (jobSearchOptions.cityStockholm.checked) {
+    jobSearchOptions.stockholm = "&lanid=1";
   } else {
-    stockholm = "";
+    jobSearchOptions.stockholm = "";
   }
   // kolla om göteborg-boxen är checkad och lagra i variabeln
-  if (cityGoteborg.checked) {
-    goteborg = "&lanid=14";
+  if (jobSearchOptions.cityGoteborg.checked) {
+    jobSearchOptions.goteborg = "&lanid=14";
   } else {
-    goteborg = "";
+    jobSearchOptions.goteborg = "";
   }
   // kolla om malmö-boxen är checkad och lagra i variabeln
-  if (cityMalmo.checked) {
-    malmo = "&lanid=12";
+  if (jobSearchOptions.cityMalmo.checked) {
+    jobSearchOptions.malmo = "&lanid=12";
   } else {
-    malmo = "";
+    jobSearchOptions.malmo = "";
   }
-  searchByCriteria(`platsannonser/matchning?nyckelord=${nyckelord}${stockholm}${goteborg}${malmo}&antalrader=30`);
+  searchByCriteria(`platsannonser/matchning?nyckelord=${jobSearchOptions.nyckelord}${jobSearchOptions.stockholm}${jobSearchOptions.goteborg}${jobSearchOptions.malmo}&antalrader=30`);
   // searchByCriteria(`platsannonser/matchning?${stockholm}${goteborg}${malmo}&nyckelord=${searchKeyword}&antalrader=30`);
 });
 
@@ -103,4 +117,10 @@ async function fetchData(url) {
       return error;
   }
 }
-  
+
+
+// window.onload = () => {
+//   console.log('Window Loaded')
+//   const apiData = "platsannonser/matchning?nyckelord=javascript&sida=1&antalrader=10";
+//   printTop10(apiData);
+// }
