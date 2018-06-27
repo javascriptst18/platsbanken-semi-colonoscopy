@@ -1,13 +1,21 @@
 .form-wrapper {
-  width: 90%;
-  margin: 0 auto;
-  padding-bottom: 6rem;
+  width: 100%;
+  // padding-bottom: 6rem;
   text-align: center;
+}
+
+.form-wrapper-inner {
+  width: 490px;
+  max-width: 90%;
+  margin: 0 auto;
+  background-color: #f2f2f2;
+  
 }
 
 form {
   display: inline-block;
   margin: 0 auto;
+  // padding: 2rem 0;
 }
 
 textarea, 
@@ -86,6 +94,9 @@ button:hover {
 .load-button-wrapper {
   margin-bottom: 6rem;
   text-align: center;
+  // & button {
+  //   display: none;
+  // }
 }
 
 .search-field {
@@ -99,3 +110,21 @@ button:hover {
 .search-filter-1 {
     
 }
+
+
+// button,
+// input {
+//   overflow: visible;
+// }
+
+// button,
+// select {
+//   text-transform: none;
+// }
+
+// button,
+// html [type="button"],
+// [type="reset"],
+// [type="submit"] {
+//   -webkit-appearance: button;
+// }
