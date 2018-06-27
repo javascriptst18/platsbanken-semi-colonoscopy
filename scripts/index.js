@@ -2,8 +2,8 @@
 
 let cardWrapper = document.querySelector(".card-wrapper");
 let apiData = "";
-let divToPrint = "";
 
+// all options and input for the job search functionality
 let jobSearchOptions = {
   mainSearchForm: document.querySelector("#mainSearchForm"),
   searchKeyword: document.querySelector("#searchKeyword"),
@@ -46,12 +46,12 @@ async function searchByCriteria(searchCriteria) {
   const matches = await responseObject.json();
   const apiData = matches.matchningslista.matchningdata;
 
-  printTop10(apiData);
+  printSearchResults(apiData);
 }
 
-let printTop10 = function(apiData) {
+let printSearchResults = function(apiData) {
+  let divToPrint = "";
   for (let each of apiData){
-  
   divToPrint += 
   `
   <div class=card>
@@ -82,7 +82,7 @@ mainSearchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   // kolla om input field har innehåll och lagra i variabeln
   if (jobSearchOptions.searchKeyword.value !== "") {
-    nyckelord = searchKeyword.value;
+    jobSearchOptions.nyckelord = searchKeyword.value;
   } else {
     jobSearchOptions.nyckelord = "";
   }
@@ -122,5 +122,5 @@ async function fetchData(url) {
 // window.onload = () => {
 //   console.log('Window Loaded')
 //   const apiData = "platsannonser/matchning?nyckelord=javascript&sida=1&antalrader=10";
-//   printTop10(apiData);
+//   printSearchResults(apiData);
 // }
