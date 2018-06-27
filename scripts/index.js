@@ -1,10 +1,8 @@
-/* VARIABLES */
-
 // form input and search results
 const searchForm = document.querySelector("#mainSearchForm");
 const loadMore = document.querySelector("#loadMore");
 let searchKeyword = "";
-let searchCity = "";
+let searchCity = "&lanid=";
 let searchListings = 1;
 let searchString = "";
 let searchResults = "";
@@ -12,14 +10,12 @@ let searchResults = "";
 // wrapper for printing search results
 const cardWrapper = document.querySelector(".card-wrapper");
 
-/* EVENTLISTENERS */
-
  // search form submit listener
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   // clear previous search parameters
   searchKeyword = "";
-  searchCity = "";
+  searchCity = "&lanid=";
   searchListings = 1;
   searchString = "";
   searchResults = "";
@@ -27,8 +23,9 @@ searchForm.addEventListener("submit", (event) => {
   keyword = document.querySelector("#searchKeyword");
   city = document.querySelector('#searchCity');
   searchKeyword = keyword.value;
-  searchCity = city.value;
-  searchString = `platsannonser/matchning?nyckelord=${searchKeyword}&lanid=${searchCity}&sida=${searchListings}&antalrader=10`;
+  searchCity += city.value;
+  searchString = `platsannonser/matchning?nyckelord=${searchKeyword}${searchCity}&sida=${searchListings}`;
+  // searchString = `platsannonser/matchning?nyckelord=${searchKeyword}&lanid=${searchCity}&sida=${searchListings}&antalrader=30`;
   // pass search parameters to search for results
   searchByCriteria(searchString);
 });
@@ -42,25 +39,38 @@ loadMore.addEventListener('click', function (event) {
   searchByCriteria(searchString);
 });
 
-/* FUNCTIONS */
-
 // fetch json data from api
 async function searchByCriteria(searchCriteria) {
-  const baseURL = "http://api.arbetsformedlingen.se/af/v0/";
-  const responseObject = await fetch(baseURL + searchCriteria);
-  const matches = await responseObject.json();
-  const apiData = matches.matchningslista.matchningdata;
-  // pass data to print search results
-  printSearchResults(apiData);
+  try {
+    const baseURL = "http://api.arbetsformedlingen.se/af/v0/";
+    const responseObject = await fetch(baseURL + searchCriteria);
+    const matches = await responseObject.json();
+    const apiData = matches.matchningslista.matchningdata;
+    // pass data to print search results
+    printSearchResults(apiData);
+    // show "load more results" button if search generates a response
+    loadMore.classList.remove("hidden");
+  }
+  catch {
+    let errorMessage = `
+    <div class="card">
+    <h3 class="empty-search">Din sökning gav inga träffar.</h3>
+    </div>
+    `;
+    cardWrapper.innerHTML = errorMessage;
+    // hide "load more results" button if search have no results
+    loadMore.classList.add("hidden");
+  }
 }
 
 // print search results from user input search query
 let printSearchResults = function(apiData) {
   for (let each of apiData){
-    let shortDate=shortenDate(each.sista_ansokningsdag);
+    // run conversion on search result date/time details
+    let shortDate = shortenDate(each.sista_ansokningsdag);
     let timeFromPub = calculateTime(each.publiceraddatum);
     searchResults += `
-      <div class=card>
+      <div class="card">
       <div class="card-flex"><h3 class="annons-rubrik">${each.annonsrubrik}</h3><h5 class="lan">${each.kommunnamn}</h5></div>
       <h5 class="yrkesbenamning">${each.yrkesbenamning}</h5>
       <h3 class="foretag">Företag: ${each.arbetsplatsnamn}</h3>
@@ -68,13 +78,20 @@ let printSearchResults = function(apiData) {
       <div class="card-flex2"><h5 class="publicerad">${timeFromPub}</h5>
       <h5 class="deadline">Sista ansökningsdag: <span>${shortDate}</span</h5>
       </div>
-      <a href="${each.annonsurl}" class="flex-link"><button class="ansok">Ansök</button></a>
+      <a href="${each.annonsurl}" class="flex-link"><button class="ansok">Gå till annonsen</button></a>
       </div>
       </div>
     `;
   }
+  // display search results on the html page
   cardWrapper.innerHTML = searchResults;
+  // reset form field/options after submit (does not clear search parameters!)
   mainSearchForm.reset();
+  // logging search parameters to console for reference
+  console.log('Nyckelord: ' + searchKeyword);
+  console.log('Stad: ' + searchCity);
+  console.log('Sida: ' + searchListings);
+  console.log('Söksträng: ' + searchString);
 }
 
 // convert utc date for search results
