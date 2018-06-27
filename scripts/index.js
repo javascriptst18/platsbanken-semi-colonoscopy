@@ -54,7 +54,8 @@ let printSearchResults = function(apiData) {
   console.log("annonsURL = " + each.annonsurl);
   console.log("------------------------------");
   }
-  cardWrapper.innerHTML = divToPrint; 
+  cardWrapper.innerHTML = divToPrint;
+  mainSearchForm.reset();
 }
 
 // lyssna på submit från form för sökning på stad
