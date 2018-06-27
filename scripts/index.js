@@ -104,10 +104,3 @@ function calculateTime(date) {
     return parseInt(diffHour/168) + "v";
   }  
 }
-
-// FIX THIS SO THAT WE LOAD 10 LATEST JOBS WHEN PAGE (i.e. window) LOADS
-// window.onload = () => {
-//   console.log('Window Loaded')
-//   const apiData = "platsannonser/matchning?nyckelord=javascript&sida=1&antalrader=10";
-//   printSearchResults(apiData);
-// }
