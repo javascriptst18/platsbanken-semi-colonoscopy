@@ -103,4 +103,18 @@ async function fetchData(url) {
       return error;
   }
 }
-  
+
+const loadButton = document.getElementById("load-more");
+let antalRader = 30;
+
+loadButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    let loadAnExtra = 10;
+    antalRader += loadAnExtra; 
+    console.log(antalRader);
+});
+
+// let antalSidor = 1; 
+// if (antalRader > 64) {
+
+// }
