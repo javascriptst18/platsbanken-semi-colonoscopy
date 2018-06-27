@@ -109,6 +109,9 @@ loadButton.addEventListener('click', function (event) {
 });
  
 function shortenDate(date){
+  if(!date){
+    return " ";
+  }
   let datumFilter = date;
   let datum = datumFilter.toString();
   let datumShort = datum.substr(0, 10);
