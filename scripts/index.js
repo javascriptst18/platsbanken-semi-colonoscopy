@@ -91,7 +91,7 @@ async function fetchData(url) {
     let resultResolve = await result.json();
     return resultResolve; 
   } catch(error) {
-      return error;
+      return error;  
   }
 }
 
