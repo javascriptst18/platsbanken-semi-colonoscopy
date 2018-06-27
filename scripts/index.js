@@ -1,5 +1,3 @@
-
-
 let cardWrapper = document.querySelector(".card-wrapper");
 let apiData = "";
 
@@ -14,7 +12,7 @@ let jobSearchOptions = {
   goteborg: "",
   malmo: "",
   nyckelord: ""
-}
+};
 
 async function searchByCriteria(searchCriteria) {
   const baseURL = "http://api.arbetsformedlingen.se/af/v0/";
@@ -27,38 +25,41 @@ async function searchByCriteria(searchCriteria) {
 
 let printSearchResults = function(apiData) {
   let divToPrint = "";
-  for (let each of apiData){
-    
-    let shortDate=shortenDate(each.sista_ansokningsdag);
+  for (let each of apiData) {
+    let shortDate = shortenDate(each.sista_ansokningsdag);
     let timeFromPub = calculateTime(each.publiceraddatum);
-  divToPrint += 
-  `
+    divToPrint +=
+      `
   <div class=card>
-  <div class="card-flex"><h3 class="annons-rubrik">${each.annonsrubrik}</h3><h5 class="lan">${each.kommunnamn}</h5></div>
+  <div class="card-flex"><h3 class="annons-rubrik">${
+    each.annonsrubrik
+  }</h3><h5 class="lan">${each.kommunnamn}</h5></div>
   <h5 class="yrkesbenamning">${each.yrkesbenamning}</h5>
   <h3 class="foretag">Företag: ${each.arbetsplatsnamn}</h3>
   <div class="flex-button-and-date">
   <div class="card-flex2"><h5 class="publicerad">${timeFromPub}</h5>` + //lägg in funktion för att räkna ut hur gammal
-  `<h5 class="deadline">Sista ansökningsdag: <span>${shortDate}</span</h5>
+      `<h5 class="deadline">Sista ansökningsdag: <span>${shortDate}</span</h5>
   </div>
-  <a href="${each.annonsurl}" class="flex-link"><button class="ansok">Ansök</button></a>
+  <a href="${
+    each.annonsurl
+  }" class="flex-link"><button class="ansok">Ansök</button></a>
   </div>
   </div>
   `;
-  console.log("annonsrubrik = " + each.annonsrubrik);
-  console.log("yrkesbenämning = " + each.yrkesbenamning);
-  console.log("arbetsplatsnamn = " + each.arbetsplatsnamn);
-  console.log("kommunnamn = " + each.kommunnamn);
-  console.log("publiceringsdatum = " + each.publiceraddatum);
-  console.log("sista_ansokningsdag = " + each.sista_ansokningsdag);
-  console.log("annonsURL = " + each.annonsurl);
-  console.log("------------------------------");
+    console.log("annonsrubrik = " + each.annonsrubrik);
+    console.log("yrkesbenämning = " + each.yrkesbenamning);
+    console.log("arbetsplatsnamn = " + each.arbetsplatsnamn);
+    console.log("kommunnamn = " + each.kommunnamn);
+    console.log("publiceringsdatum = " + each.publiceraddatum);
+    console.log("sista_ansokningsdag = " + each.sista_ansokningsdag);
+    console.log("annonsURL = " + each.annonsurl);
+    console.log("------------------------------");
   }
-  cardWrapper.innerHTML = divToPrint; 
-}
+  cardWrapper.innerHTML = divToPrint;
+};
 
 // lyssna på submit från form för sökning på stad
-mainSearchForm.addEventListener("submit", (event) => {
+mainSearchForm.addEventListener("submit", event => {
   event.preventDefault();
   // kolla om input field har innehåll och lagra i variabeln
   if (jobSearchOptions.searchKeyword.value !== "") {
@@ -84,7 +85,11 @@ mainSearchForm.addEventListener("submit", (event) => {
   } else {
     jobSearchOptions.malmo = "";
   }
-  searchByCriteria(`platsannonser/matchning?nyckelord=${jobSearchOptions.nyckelord}${jobSearchOptions.stockholm}${jobSearchOptions.goteborg}${jobSearchOptions.malmo}&antalrader=30`);
+  searchByCriteria(
+    `platsannonser/matchning?nyckelord=${jobSearchOptions.nyckelord}${
+      jobSearchOptions.stockholm
+    }${jobSearchOptions.goteborg}${jobSearchOptions.malmo}&antalrader=30`
+  );
   // searchByCriteria(`platsannonser/matchning?${stockholm}${goteborg}${malmo}&nyckelord=${searchKeyword}&antalrader=30`);
 });
 
@@ -92,24 +97,24 @@ async function fetchData(url) {
   try {
     let result = await fetch(url);
     let resultResolve = await result.json();
-    return resultResolve; 
-  } catch(error) {
-      return error;  
+    return resultResolve;
+  } catch (error) {
+    return error;
   }
 }
 
 const loadButton = document.getElementById("load-more");
 let antalRader = 30;
 
-loadButton.addEventListener('click', function (event) {
-    event.preventDefault();
-    let loadAnExtra = 10;
-    antalRader += loadAnExtra; 
-    console.log(antalRader);
+loadButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  let loadAnExtra = 10;
+  antalRader += loadAnExtra;
+  console.log(antalRader);
 });
- 
-function shortenDate(date, number = 0){
-  if(!date){
+
+function shortenDate(date, number = 0) {
+  if (!date) {
     return " ";
   }
   let datumFilter = date;
@@ -117,20 +122,20 @@ function shortenDate(date, number = 0){
   let datumShort = datum.substr(number, 10);
   return datumShort;
 }
-function calculateTime(date){
+function calculateTime(date) {
   let newDate = Date.parse(new Date());
   let oldDate = Date.parse(date);
   let calcDateDiff = newDate - oldDate;
   let diffHour = calcDateDiff / 3600000;
-  if(diffHour<1){
-    return parseInt(diffHour*60)+ "m"
-  }else if(diffHour<24){
+  if (diffHour < 1) {
+    return parseInt(diffHour * 60) + "m";
+  } else if (diffHour < 24) {
     return parseInt(diffHour) + "h";
-  }else if(diffHour>24 && diffHour<168){
-    return parseInt(diffHour/24) + "d";
-  }else if(diffHour>168){
-    return parseInt(diffHour/168) + "v";
-  }  
+  } else if (diffHour > 24 && diffHour < 168) {
+    return parseInt(diffHour / 24) + "d";
+  } else if (diffHour > 168) {
+    return parseInt(diffHour / 168) + "v";
+  }
 }
 
 // FIX THIS SO THAT WE LOAD 10 LATEST JOBS WHEN PAGE (i.e. window) LOADS
