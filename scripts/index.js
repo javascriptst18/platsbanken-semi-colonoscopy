@@ -2,28 +2,19 @@
 
 let cardWrapper = document.querySelector(".card-wrapper");
 let apiData = "";
-let divToPrint = "";
 
-// form för att söka på stad
-const mainSearchForm = document.querySelector("#mainSearchForm");
-// input field för att söka på nyckelord
-const searchKeyword = document.querySelector("#searchKeyword");
-// checkbox för att välja stockholm
-const cityStockholm = document.querySelector("#cityStockholm");
-// checkbox för att välja göteborg
-const cityGoteborg = document.querySelector("#cityGoteborg");
-// checkbox för att välja malmö
-const cityMalmo = document.querySelector("#cityMalmo");
-
-// tom variabel för att lagra stockholm söksträng
-let stockholm = "";
-// tom variabel för att lagra göteborg söksträng
-let goteborg = "";
-// tom variabel för att lagra malmö söksträng
-let malmo = "";
-// tom variabel för att lagra nyckelord i sökning
-let nyckelord = "";
-
+// all options and input for the job search functionality
+let jobSearchOptions = {
+  mainSearchForm: document.querySelector("#mainSearchForm"),
+  searchKeyword: document.querySelector("#searchKeyword"),
+  cityStockholm: document.querySelector("#cityStockholm"),
+  cityGoteborg: document.querySelector("#cityGoteborg"),
+  cityMalmo: document.querySelector("#cityMalmo"),
+  stockholm: "",
+  goteborg: "",
+  malmo: "",
+  nyckelord: ""
+}
 
 async function searchByCriteria(searchCriteria) {
   const baseURL = "http://api.arbetsformedlingen.se/af/v0/";
@@ -31,24 +22,27 @@ async function searchByCriteria(searchCriteria) {
   const matches = await responseObject.json();
   const apiData = matches.matchningslista.matchningdata;
 
-  printTop10(apiData);
+  printSearchResults(apiData);
 }
 
-
-let printTop10 = function(apiData){
+let printSearchResults = function(apiData) {
+  let divToPrint = "";
   for (let each of apiData){
-  
+    
+    let shortDate=shortenDate(each.sista_ansokningsdag);
+
   divToPrint += 
   `
   <div class=card>
   <div class="card-flex"><h3 class="annons-rubrik">${each.annonsrubrik}</h3><h5 class="lan">${each.kommunnamn}</h5></div>
   <h5 class="yrkesbenamning">${each.yrkesbenamning}</h5>
   <h3 class="foretag">Företag: ${each.arbetsplatsnamn}</h3>
-  
-  <div class="card-flex"><h5 class="publicerad">3V</h5>` + //lägg in funktion för att räkna ut hur gammal
-  `<h5 class="deadline">Sista ansökningsdag: <span>${each.sista_ansokningsdag}</span</h5>
+  <div class="flex-button-and-date">
+  <div class="card-flex2"><h5 class="publicerad">3V</h5>` + //lägg in funktion för att räkna ut hur gammal
+  `<h5 class="deadline">Sista ansökningsdag: <span>${shortDate}</span</h5>
   </div>
   <a href="${each.annonsurl}" class="flex-link"><button class="ansok">Ansök</button></a>
+  </div>
   </div>
   `;
   console.log("annonsrubrik = " + each.annonsrubrik);
@@ -67,30 +61,30 @@ let printTop10 = function(apiData){
 mainSearchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   // kolla om input field har innehåll och lagra i variabeln
-  if (searchKeyword.value !== "") {
-    nyckelord = searchKeyword.value;
+  if (jobSearchOptions.searchKeyword.value !== "") {
+    jobSearchOptions.nyckelord = searchKeyword.value;
   } else {
-    nyckelord = "";
+    jobSearchOptions.nyckelord = "";
   }
   // kolla om stockholm-boxen är checkad och lagra i variabeln
-  if (cityStockholm.checked) {
-    stockholm = "&lanid=1";
+  if (jobSearchOptions.cityStockholm.checked) {
+    jobSearchOptions.stockholm = "&lanid=1";
   } else {
-    stockholm = "";
+    jobSearchOptions.stockholm = "";
   }
   // kolla om göteborg-boxen är checkad och lagra i variabeln
-  if (cityGoteborg.checked) {
-    goteborg = "&lanid=14";
+  if (jobSearchOptions.cityGoteborg.checked) {
+    jobSearchOptions.goteborg = "&lanid=14";
   } else {
-    goteborg = "";
+    jobSearchOptions.goteborg = "";
   }
   // kolla om malmö-boxen är checkad och lagra i variabeln
-  if (cityMalmo.checked) {
-    malmo = "&lanid=12";
+  if (jobSearchOptions.cityMalmo.checked) {
+    jobSearchOptions.malmo = "&lanid=12";
   } else {
-    malmo = "";
+    jobSearchOptions.malmo = "";
   }
-  searchByCriteria(`platsannonser/matchning?nyckelord=${nyckelord}${stockholm}${goteborg}${malmo}&antalrader=30`);
+  searchByCriteria(`platsannonser/matchning?nyckelord=${jobSearchOptions.nyckelord}${jobSearchOptions.stockholm}${jobSearchOptions.goteborg}${jobSearchOptions.malmo}&antalrader=30`);
   // searchByCriteria(`platsannonser/matchning?${stockholm}${goteborg}${malmo}&nyckelord=${searchKeyword}&antalrader=30`);
 });
 
@@ -100,7 +94,7 @@ async function fetchData(url) {
     let resultResolve = await result.json();
     return resultResolve; 
   } catch(error) {
-      return error;
+      return error;  
   }
 }
 
@@ -113,8 +107,17 @@ loadButton.addEventListener('click', function (event) {
     antalRader += loadAnExtra; 
     console.log(antalRader);
 });
+ 
+function shortenDate(date){
+  let datumFilter = date;
+  let datum = datumFilter.toString();
+  let datumShort = datum.substr(0, 10);
+  return datumShort;
+}
 
-// let antalSidor = 1; 
-// if (antalRader > 64) {
-
+// FIX THIS SO THAT WE LOAD 10 LATEST JOBS WHEN PAGE (i.e. window) LOADS
+// window.onload = () => {
+//   console.log('Window Loaded')
+//   const apiData = "platsannonser/matchning?nyckelord=javascript&sida=1&antalrader=10";
+//   printSearchResults(apiData);
 // }
