@@ -95,6 +95,12 @@ async function fetchData(url) {
   }
 }
 
+function shortenDate(date){
+  let datumFilter = date.toString();
+datumFilter = datumFilter.substr(0, 10);
+return datumFilter;
+}
+
 // FIX THIS SO THAT WE LOAD 10 LATEST JOBS WHEN PAGE (i.e. window) LOADS
 // window.onload = () => {
 //   console.log('Window Loaded')
