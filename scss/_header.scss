@@ -1,0 +1,32 @@
+.header-wrapper {
+  width: 100%;
+  color: #fff;
+  background: rgb(0,247,255);
+  background: -moz-linear-gradient(156deg, rgba(0,247,255,1) 0%, rgba(3,169,244,1) 100%);
+  background: -webkit-linear-gradient(156deg, rgba(0,247,255,1) 0%, rgba(3,169,244,1) 100%);
+  background: linear-gradient(156deg, rgba(0,247,255,1) 0%, rgba(3,169,244,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00f7ff",endColorstr="#03a9f4",GradientType=1);
+}
+
+.hero {
+  padding-top: 8rem;
+  padding-bottom: 3rem;
+}
+
+.hero-content {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-heading {
+  font-size: 4em;
+  margin: 0 0 .5rem 0;
+  // color: #ff8800;
+  color: coral;
+}
+
+.hero-subheading {
+  font-size: 2.2em;
+  margin: 0 0 1rem 0;
+}
