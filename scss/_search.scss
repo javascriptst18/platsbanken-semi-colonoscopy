@@ -63,7 +63,7 @@ input::-ms-input-placeholder {
   color: #a1a1a1;
 }
 
-form button {
+button {
   width: 8rem;
   border: none;
   border-radius: .5rem;
@@ -73,7 +73,7 @@ form button {
   font-size: 1em;
 }
 
-form button:hover {
+button:hover {
   filter: alpha(opacity = 85);
   opacity: .85;
   -webkit-transition: opacity .15s ease-in-out;
@@ -81,6 +81,11 @@ form button:hover {
   -ms-transition: opacity .15s ease-in-out;
   -o-transition: opacity .15s ease-in-out;
   transition: opacity .15s ease-in-out;
+}
+
+.load-button-wrapper {
+  margin: 0 auto;
+  text-align: center;
 }
 
 .search-field {

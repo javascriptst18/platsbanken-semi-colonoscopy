@@ -30,7 +30,7 @@ let printSearchResults = function(apiData) {
   for (let each of apiData){
     
     let shortDate=shortenDate(each.sista_ansokningsdag);
-
+    let timeFromPub = calculateTime(each.publiceraddatum);
   divToPrint += 
   `
   <div class=card>
@@ -38,7 +38,7 @@ let printSearchResults = function(apiData) {
   <h5 class="yrkesbenamning">${each.yrkesbenamning}</h5>
   <h3 class="foretag">Företag: ${each.arbetsplatsnamn}</h3>
   <div class="flex-button-and-date">
-  <div class="card-flex2"><h5 class="publicerad">3V</h5>` + //lägg in funktion för att räkna ut hur gammal
+  <div class="card-flex2"><h5 class="publicerad">${timeFromPub}</h5>` + //lägg in funktion för att räkna ut hur gammal
   `<h5 class="deadline">Sista ansökningsdag: <span>${shortDate}</span</h5>
   </div>
   <a href="${each.annonsurl}" class="flex-link"><button class="ansok">Ansök</button></a>
@@ -54,7 +54,8 @@ let printSearchResults = function(apiData) {
   console.log("annonsURL = " + each.annonsurl);
   console.log("------------------------------");
   }
-  cardWrapper.innerHTML = divToPrint; 
+  cardWrapper.innerHTML = divToPrint;
+  mainSearchForm.reset();
 }
 
 // lyssna på submit från form för sökning på stad
@@ -88,16 +89,6 @@ mainSearchForm.addEventListener("submit", (event) => {
   // searchByCriteria(`platsannonser/matchning?${stockholm}${goteborg}${malmo}&nyckelord=${searchKeyword}&antalrader=30`);
 });
 
-async function fetchData(url) {
-  try {
-    let result = await fetch(url);
-    let resultResolve = await result.json();
-    return resultResolve; 
-  } catch(error) {
-      return error;  
-  }
-}
-
 const loadButton = document.getElementById("load-more");
 let antalRader = 30;
 
@@ -108,14 +99,29 @@ loadButton.addEventListener('click', function (event) {
     console.log(antalRader);
 });
  
-function shortenDate(date){
+function shortenDate(date, number = 0){
   if(!date){
     return " ";
   }
   let datumFilter = date;
   let datum = datumFilter.toString();
-  let datumShort = datum.substr(0, 10);
+  let datumShort = datum.substr(number, 10);
   return datumShort;
+}
+function calculateTime(date){
+  let newDate = Date.parse(new Date());
+  let oldDate = Date.parse(date);
+  let calcDateDiff = newDate - oldDate;
+  let diffHour = calcDateDiff / 3600000;
+  if(diffHour<1){
+    return parseInt(diffHour*60)+ "m"
+  }else if(diffHour<24){
+    return parseInt(diffHour) + "h";
+  }else if(diffHour>24 && diffHour<168){
+    return parseInt(diffHour/24) + "d";
+  }else if(diffHour>168){
+    return parseInt(diffHour/168) + "v";
+  }  
 }
 
 // FIX THIS SO THAT WE LOAD 10 LATEST JOBS WHEN PAGE (i.e. window) LOADS
