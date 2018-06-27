@@ -16,30 +16,6 @@ let jobSearchOptions = {
   nyckelord: ""
 }
 
-/*
-
-// form för att söka på stad
-const mainSearchForm = document.querySelector("#mainSearchForm");
-// input field för att söka på nyckelord
-const searchKeyword = document.querySelector("#searchKeyword");
-// checkbox för att välja stockholm
-const cityStockholm = document.querySelector("#cityStockholm");
-// checkbox för att välja göteborg
-const cityGoteborg = document.querySelector("#cityGoteborg");
-// checkbox för att välja malmö
-const cityMalmo = document.querySelector("#cityMalmo");
-
-// tom variabel för att lagra stockholm söksträng
-let stockholm = "";
-// tom variabel för att lagra göteborg söksträng
-let goteborg = "";
-// tom variabel för att lagra malmö söksträng
-let malmo = "";
-// tom variabel för att lagra nyckelord i sökning
-let nyckelord = "";
-
-*/
-
 async function searchByCriteria(searchCriteria) {
   const baseURL = "http://api.arbetsformedlingen.se/af/v0/";
   const responseObject = await fetch(baseURL + searchCriteria);
@@ -118,7 +94,7 @@ async function fetchData(url) {
   }
 }
 
-
+// FIX THIS SO THAT WE LOAD 10 LATEST JOBS WHEN PAGE (i.e. window) LOADS
 // window.onload = () => {
 //   console.log('Window Loaded')
 //   const apiData = "platsannonser/matchning?nyckelord=javascript&sida=1&antalrader=10";
