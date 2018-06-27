@@ -89,16 +89,6 @@ mainSearchForm.addEventListener("submit", (event) => {
   // searchByCriteria(`platsannonser/matchning?${stockholm}${goteborg}${malmo}&nyckelord=${searchKeyword}&antalrader=30`);
 });
 
-async function fetchData(url) {
-  try {
-    let result = await fetch(url);
-    let resultResolve = await result.json();
-    return resultResolve; 
-  } catch(error) {
-      return error;  
-  }
-}
-
 const loadButton = document.getElementById("load-more");
 let antalRader = 30;
 
