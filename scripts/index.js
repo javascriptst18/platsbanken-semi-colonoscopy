@@ -28,6 +28,9 @@ async function searchByCriteria(searchCriteria) {
 let printSearchResults = function(apiData) {
   let divToPrint = "";
   for (let each of apiData){
+    
+    let shortDate=shortenDate(each.sista_ansokningsdag);
+
   divToPrint += 
   `
   <div class=card>
@@ -36,7 +39,7 @@ let printSearchResults = function(apiData) {
   <h3 class="foretag">Företag: ${each.arbetsplatsnamn}</h3>
   <div class="flex-button-and-date">
   <div class="card-flex2"><h5 class="publicerad">3V</h5>` + //lägg in funktion för att räkna ut hur gammal
-  `<h5 class="deadline">Sista ansökningsdag: <span>${each.sista_ansokningsdag}</span</h5>
+  `<h5 class="deadline">Sista ansökningsdag: <span>${shortDate}</span</h5>
   </div>
   <a href="${each.annonsurl}" class="flex-link"><button class="ansok">Ansök</button></a>
   </div>
@@ -94,11 +97,12 @@ async function fetchData(url) {
       return error;  
   }
 }
-
+ 
 function shortenDate(date){
-  let datumFilter = date.toString();
-datumFilter = datumFilter.substr(0, 10);
-return datumFilter;
+  let datumFilter = date;
+  let datum = datumFilter.toString();
+  let datumShort = datum.substr(0, 10);
+  return datumShort;
 }
 
 // FIX THIS SO THAT WE LOAD 10 LATEST JOBS WHEN PAGE (i.e. window) LOADS
