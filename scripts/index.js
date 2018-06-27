@@ -91,8 +91,14 @@ async function fetchData(url) {
     let resultResolve = await result.json();
     return resultResolve; 
   } catch(error) {
-      return error;
+      return error;  
   }
+}
+
+function shortenDate(date){
+  let datumFilter = date.toString();
+datumFilter = datumFilter.substr(0, 10);
+return datumFilter;
 }
 
 // FIX THIS SO THAT WE LOAD 10 LATEST JOBS WHEN PAGE (i.e. window) LOADS
