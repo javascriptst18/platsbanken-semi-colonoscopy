@@ -25,7 +25,6 @@ searchForm.addEventListener("submit", (event) => {
   searchKeyword = keyword.value;
   searchCity += city.value;
   searchString = `platsannonser/matchning?nyckelord=${searchKeyword}${searchCity}&sida=${searchListings}`;
-  // searchString = `platsannonser/matchning?nyckelord=${searchKeyword}&lanid=${searchCity}&sida=${searchListings}&antalrader=30`;
   // pass search parameters to search for results
   searchByCriteria(searchString);
 });
