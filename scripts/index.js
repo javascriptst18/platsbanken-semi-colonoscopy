@@ -56,12 +56,8 @@ let printSearchResults = function(apiData) {
     console.log("------------------------------");
   }
   cardWrapper.innerHTML = divToPrint;
-<<<<<<< HEAD
   mainSearchForm.reset();
 }
-=======
-};
->>>>>>> developer_CA
 
 // lyssna på submit från form för sökning på stad
 mainSearchForm.addEventListener("submit", event => {
@@ -98,19 +94,6 @@ mainSearchForm.addEventListener("submit", event => {
   // searchByCriteria(`platsannonser/matchning?${stockholm}${goteborg}${malmo}&nyckelord=${searchKeyword}&antalrader=30`);
 });
 
-<<<<<<< HEAD
-=======
-async function fetchData(url) {
-  try {
-    let result = await fetch(url);
-    let resultResolve = await result.json();
-    return resultResolve;
-  } catch (error) {
-    return error;
-  }
-}
-
->>>>>>> developer_CA
 const loadButton = document.getElementById("load-more");
 let antalRader = 30;
 
