@@ -2,11 +2,7 @@
   position: relative;
   width: 100%;
   color: #fff;
-  background: rgb(3,169,244);
-  background: -moz-linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(3,133,244,1) 65%, rgba(3,94,244,1) 100%);
-  background: -webkit-linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(3,133,244,1) 65%, rgba(3,94,244,1) 100%);
-  background: linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(3,133,244,1) 65%, rgba(3,94,244,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#03a9f4",endColorstr="#035ef4",GradientType=1);
+  background-color: #03A9F4;
 }
 
 .header-wrapper::after {
