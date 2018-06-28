@@ -185,6 +185,6 @@ getLanData()
       option.text = lanData.soklista.sokdata[i].namn;
       option.value = lanData.soklista.sokdata[i].id;
       dropdown.add(option);
-      console.log(lanData);
+      
     }
   })
