@@ -8,11 +8,15 @@ let searchString = "";
 let searchResults = "";
 
 // wrapper for printing search results
-const cardWrapper = document.querySelector(".card-wrapper");
+let cardWrapper = document.querySelector(".card-wrapper");
 
  // search form submit listener
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  cardWrapper = document.querySelector(".card-wrapper");  
+  while(cardWrapper.hasChildNodes()){ 
+    cardWrapper.removeChild(cardWrapper.lastChild);
+  }
   // clear previous search parameters
   searchKeyword = "";
   searchCity = "";
@@ -24,7 +28,8 @@ searchForm.addEventListener("submit", (event) => {
   city = document.querySelector('#searchCity');
   searchKeyword = keyword.value;
   searchCity += city.value;
-  searchString = `platsannonser/matchning?nyckelord=${searchKeyword}&lanid=${searchCity}&sida=${searchListings}`;
+  searchString = `platsannonser/matchning?nyckelord=${searchKeyword}&lanid=${searchCity}&sida=`;
+
   // pass search parameters to search for results
   searchByCriteria(searchString);
 });
@@ -34,6 +39,7 @@ loadMore.addEventListener('click', function (event) {
   event.preventDefault();
   // increment search listings
   searchListings++;
+ 
   // print incremented search listings
   searchByCriteria(searchString);
 });
@@ -41,8 +47,9 @@ loadMore.addEventListener('click', function (event) {
 // fetch json data from api
 async function searchByCriteria(searchCriteria) {
   try {
+    console.log(searchCriteria + searchListings);
     const baseURL = "http://api.arbetsformedlingen.se/af/v0/";
-    const responseObject = await fetch(baseURL + searchCriteria);
+    const responseObject = await fetch(baseURL + searchCriteria + searchListings);
     const matches = await responseObject.json();
     const apiData = matches.matchningslista.matchningdata;
     // pass data to print search results
@@ -50,7 +57,8 @@ async function searchByCriteria(searchCriteria) {
     // show "load more results" button if search generates a response
     loadMore.classList.remove("hidden");
   }
-  catch {
+  catch(error) {
+    console.log(error);
     let errorMessage = `
     <div class="card">
     <h3 class="empty-search">Din sökning gav inga träffar.</h3>
@@ -68,8 +76,8 @@ let printSearchResults = function(apiData) {
     // run conversion on search result date/time details
     let shortDate = shortenDate(each.sista_ansokningsdag);
     let timeFromPub = calculateTime(each.publiceraddatum);
-    searchResults += `
-      <div class="card">
+    let searchResults2 = `
+      
       <div class="card-flex"><h3 class="annons-rubrik">${each.annonsrubrik}</h3><h5 class="lan">${each.kommunnamn}</h5></div>
       <h5 class="yrkesbenamning">${each.yrkesbenamning}</h5>
       <h3 class="foretag">Företag: ${each.arbetsplatsnamn}</h3>
@@ -79,11 +87,25 @@ let printSearchResults = function(apiData) {
       </div>
       <a href="${each.annonsurl}" class="flex-link"><button class="ansok">Gå till annonsen</button></a>
       </div>
-      </div>
+      
     `;
+    
+    let div = document.createElement("div");
+    div.classList.add("card");
+    div.id=each.annonsid;
+    div.innerHTML=searchResults2;
+   
+    cardWrapper.appendChild(div);
+    let card = cardWrapper.lastChild;
+    card.addEventListener("click", () =>{
+      console.log(card.id);
+    });
+    
+    
   }
   // display search results on the html page
-  cardWrapper.innerHTML = searchResults;
+  //cardWrapper.innerHTML = searchResults;
+  
   // reset form field/options after submit (does not clear search parameters!)
   mainSearchForm.reset();
   // logging search parameters to console for reference
@@ -120,3 +142,4 @@ function calculateTime(date) {
     return parseInt(diffHour/168) + "v";
   }  
 }
+
