@@ -75,7 +75,7 @@ let printSearchResults = function(apiData) {
     // run conversion on search result date/time details
     let shortDate = shortenDate(each.sista_ansokningsdag);
     let timeFromPub = calculateTime(each.publiceraddatum);
-    let searchResults2 = `
+    let searchResults = `
       
       <div class="card-flex"><h3 class="annons-rubrik">${each.annonsrubrik}</h3><h5 class="lan">${each.kommunnamn}</h5></div>
       <h5 class="yrkesbenamning">${each.yrkesbenamning}</h5>
@@ -89,15 +89,13 @@ let printSearchResults = function(apiData) {
       
     `;
     
-    let div = document.createElement("div");
-    div.classList.add("card");
-    div.id=each.annonsid;
-    div.innerHTML=searchResults2;
-   
+    let div = createDiv("card", each.annonsid);
+    div.innerHTML=searchResults;
     cardWrapper.appendChild(div);
     let card = cardWrapper.lastChild;
-    card.addEventListener("click", () =>{
-      console.log(card.id);
+    card.addEventListener("click", async (e) =>{
+      const data = await fetchData(card.id)
+      console.log(data.platsannons.annons.annonstext);
     });
     
     
@@ -142,3 +140,25 @@ function calculateTime(date) {
   }  
 }
 
+function createDiv(divClass, id = "") {
+  let div = document.createElement("div");
+  div.classList.add(divClass);
+  div.id=id;
+  return div;
+}
+
+async function fetchData(annonsid) {
+  try {
+const baseURL = "http://api.arbetsformedlingen.se/af/v0/platsannonser/";
+    const responseObject = await fetch(baseURL + annonsid);
+    const data = await responseObject.json();
+    return data;
+
+    // pass data to print search results
+    
+  }
+  catch(error) {
+    console.log(error);
+   
+  }
+}
