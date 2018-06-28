@@ -155,10 +155,36 @@ const baseURL = "http://api.arbetsformedlingen.se/af/v0/platsannonser/";
     return data;
 
     // pass data to print search results
-    
   }
   catch(error) {
     console.log(error);
    
   }
 }
+
+let dropdown = document.getElementById("searchCity");
+
+let option = document.createElement('option');
+option.text = 'Välj län';
+dropdown.add(option);
+
+const lanurl = 'http://api.arbetsformedlingen.se/af/v0/arbetsformedling/soklista/lan';
+
+function getLanData(){
+ return fetch(lanurl)
+  .then(response => response.json())
+  .then(data => {
+    return data;
+  });
+}
+
+getLanData()
+  .then(lanData => {
+    for (let i = 0; i < lanData.soklista.sokdata.length; i++) {
+      option = document.createElement('option');
+      option.text = lanData.soklista.sokdata[i].namn;
+      option.value = lanData.soklista.sokdata[i].id;
+      dropdown.add(option);
+      console.log(lanData);
+    }
+  })
