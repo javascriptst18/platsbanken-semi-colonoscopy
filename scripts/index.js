@@ -2,7 +2,7 @@
 const searchForm = document.querySelector("#mainSearchForm");
 const loadMore = document.querySelector("#loadMore");
 let searchKeyword = "";
-let searchCity = "&lanid=";
+let searchCity = "";
 let searchListings = 1;
 let searchString = "";
 let searchResults = "";
@@ -15,7 +15,7 @@ searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   // clear previous search parameters
   searchKeyword = "";
-  searchCity = "&lanid=";
+  searchCity = "";
   searchListings = 1;
   searchString = "";
   searchResults = "";
@@ -24,7 +24,7 @@ searchForm.addEventListener("submit", (event) => {
   city = document.querySelector('#searchCity');
   searchKeyword = keyword.value;
   searchCity += city.value;
-  searchString = `platsannonser/matchning?nyckelord=${searchKeyword}${searchCity}&sida=${searchListings}`;
+  searchString = `platsannonser/matchning?nyckelord=${searchKeyword}&lanid=${searchCity}&sida=${searchListings}`;
   // pass search parameters to search for results
   searchByCriteria(searchString);
 });
