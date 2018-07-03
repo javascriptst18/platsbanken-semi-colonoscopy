@@ -1,0 +1,115 @@
+
+.card-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-self: center;
+  flex-grow: 1;
+  margin-bottom: 3rem;
+
+  @media (min-width: 1500px) {
+    .card-wrapper {
+      border-left: thin darkgrey solid;
+      border-right: thin darkgrey solid;
+      box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
+    } 
+  }
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: calc(100%+30px);
+  display:flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  margin: 30px 10px 0;
+  padding-left:25px;
+  padding-right: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+@media (min-width: 930px) {
+  .card {
+    width: 90%;
+    max-width: 450px
+  }
+}
+
+.annons-rubrik {
+  font-weight: 100;
+  margin-bottom: 0;
+  color: rgb(76, 187, 238);
+  border-bottom: solid 2px lightgrey;
+}
+
+.yrkesbenamning {
+  margin: 0; 
+  display: inline; 
+  color: grey;
+}
+
+.lan {
+  margin-bottom: 0;
+  text-align: rigth;
+  color: #03A9F4;
+}
+
+.foretag {
+  color:coral;
+  margin-bottom: 30px;
+  margin-top:20px;
+}
+
+.deadline {
+  display: inline-block;
+  color: lightgrey;
+  margin-bottom: 4px;
+}
+
+.publicerad {
+  display:inline-block;
+  color: lightgrey;
+  margin-bottom: 4px;
+}
+
+.card-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.card-flex2 {
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  justify-content: space-between;
+  align-self: flex-end;
+}
+
+.ansok {
+  width: 80%;
+  text-align: center;
+  border-radius: 6px;
+  border: 0;
+  background-color:#03A9F4;
+  color: white;
+  
+  margin-bottom: 10px;
+}
+
+.flex-link {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-self: flex-end;
+}
+.flex-button-and-date{
+  display: flex;
+  flex-direction: column;
+  margin-top:auto;
+  
+  width: 100%;
+}

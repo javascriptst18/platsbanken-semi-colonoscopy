@@ -1,5 +1,26 @@
-$banana: #fac863;
+@import "variables";
 
-.🍌 {
-  background-color: $banana;
+* {
+  box-sizing: border-box;
 }
+
+body {
+  // background-color: #03A9F4;
+  background-color: #fff;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main-wrapper {
+  margin: 0 auto;
+  max-width: 1080px;
+  width: 90%;
+}
+
+@import "header";
+@import "search";
+@import "card";
+@import "favorite";
