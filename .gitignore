@@ -5,3 +5,5 @@ css
 *.log
 node_modules
 Thumbs.db
+yarn.lock
+package-lock.json

@@ -1,5 +1,27 @@
 {
   "dependencies": {
     "sass": "^1.7.1"
+  },
+  "name": "platsbanken",
+  "description": "## Uppgift Ni ska skapa en webbapplikation som använder sig utav _Arbetsförmedlingens API_ för att hämta de senaste annonserna för en viss yrkesgrupp eller ett viss område.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javascriptst18/platsbanken-semi-colonoscopy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javascriptst18/platsbanken-semi-colonoscopy/issues"
+  },
+  "homepage": "https://github.com/javascriptst18/platsbanken-semi-colonoscopy#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0"
   }
 }
